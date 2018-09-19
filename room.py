@@ -34,17 +34,20 @@ class Room():
 
     # Print room details
     def get_details(self):
-        print( 'You\'re now in the %s: %s.' % (self.name, self.description) )
+        print('You\'re in the %s: %s.' % (self.name, self.description))
         for direction in self.linked_rooms:
             room = self.linked_rooms[direction]
             direction = direction.title()
-            print( 'To the %s is the %s.' % (direction, room.get_name()))
+            print('To the %s is the %s.' % (direction, room.get_name()))
         inhabitant = self.get_character()
         if inhabitant is not None:
+            print('--------------------')
             inhabitant.describe()
-            return inhabitant
-    
-        
+            print('\n')
+        else:
+            print('--------------------')
+            print('\n')
+
     # Move to another room    
     def move(self, direction):
         if direction in self.linked_rooms:
