@@ -1,21 +1,18 @@
 class Room():
     # Create a room
-    def __init__(self, room_name, length, width, room_color):
+    def __init__(self, room_name):
         self.name = room_name
-        self.length = length
-        self.width = width
-        self.color = room_color
         self.description = None
         self.linked_rooms = {}
         self.character = []
-        self.item = None
+        self.item = []
 
     # Set room attributes
     def set_description(self, room_description):
         self.description = room_description
 
     def set_item(self, item_name):
-        self.item = item_name
+        self.item.append(item_name)
 
     def set_character(self, char_name):
         self.character.append(char_name)
@@ -49,9 +46,11 @@ class Room():
                 room = self.linked_rooms[direction]
                 direction = direction.title()
                 print('The %s is to the %s.' % (room.get_name(), direction))
-        item = self.get_item()
-        if item is not None:
-            item.describe()
+
+        if self.get_item is not None:
+            for i in range(0, len(self.item)):
+                self.item[i].describe()
+        
         else:
             print('')
         if self.character is not None:

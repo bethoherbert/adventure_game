@@ -5,19 +5,19 @@ from character import Enemy
 from character import Friend
 
 # Set up Rooms
-masterbr = Room('Master bedroom', 10, 10, 'blue')
+masterbr = Room('Master bedroom')
 masterbr.set_description('A rectangular room that is 2/3rds full of one giant bed.')
 
-battle_room = Room('Battle Room', 20, 15, 'orange')
+battle_room = Room('Battle Room')
 battle_room.set_description('It has a ring where you fight, and some stands for the people to sit and watch.')
 
-kitchen = Room('Kitchen', 20, 15, 'yellow')
+kitchen = Room('Kitchen')
 kitchen.set_description('It\'s an HGTV-fan\'s dream.')
 
-dining_hall = Room('Dining Hall', 20, 25, 'blue')
+dining_hall = Room('Dining Hall')
 dining_hall.set_description('Your typical college mess.')
 
-ballroom = Room('Ballroom', 50, 25, 'gold')
+ballroom = Room('Ballroom')
 ballroom.set_description('Cinderella would be in awe.')
 
 masterbr.link_room(kitchen, "west")
@@ -32,9 +32,14 @@ battle_room.link_room(ballroom, "magic")
 ballroom.link_room(dining_hall, "east")
 ballroom.link_room(kitchen, "magic")
 
-kong = Item('Kong', 'Red')
+# Set up Items
+kong = Item('Kong', 'red')
 kong.set_description( 'Cone-like rubber dog toy' )
 kitchen.set_item(kong)
+
+backpack = Item('backpack', 'khaki')
+backpack.set_description('You\'ll need this to carry anything you want to pick up.')
+kitchen.set_item(backpack)
 
 # Set up enemies
 weakness1 = 'butter pecan ice cream'
