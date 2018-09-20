@@ -66,6 +66,7 @@ masterbr.set_character(apollo)
 gil = Friend('Gil', 'leprechaun')
 gil.set_conversation('Top \'o the mornin\' to ye!')
 gil.set_superpower(weakness2)
+ballroom.set_character(gil)
 
 artemis = Friend('Artemis', 'sparkly UniKitty')
 artemis.set_conversation('Hiiiiii!!!!!!! I am SO glad to see you.')

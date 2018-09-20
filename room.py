@@ -7,7 +7,7 @@ class Room():
         self.color = room_color
         self.description = None
         self.linked_rooms = {}
-        self.character = None
+        self.character = []
         self.item = None
 
     # Set room attributes
@@ -18,7 +18,7 @@ class Room():
         self.item = item_name
 
     def set_character(self, char_name):
-        self.character = char_name
+        self.character.append(char_name)
 
     def set_name(self, room_name):
         self.name = room_name
@@ -54,11 +54,12 @@ class Room():
             item.describe()
         else:
             print('')
-        inhabitant = self.get_character()
-        if inhabitant is not None:
-            inhabitant.describe()
+        if self.character is not None:
+            for i in range(0, len(self.character)):
+                self.character[i].describe()
             print('\n')
         else:
+            print('No one else is in here with you.')
             print('------------------------')
             print('\n')
 
