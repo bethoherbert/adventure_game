@@ -16,6 +16,9 @@ class Item():
         self.name = item_name
 
     # Get item attributes
+    def describe(self):
+        print( '\n /o/ In this room, there is a %s %s.' % (self.color, self.name) )
+
     def get_description(self):
         return self.description    
     

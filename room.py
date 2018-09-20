@@ -8,10 +8,14 @@ class Room():
         self.description = None
         self.linked_rooms = {}
         self.character = None
+        self.item = None
 
     # Set room attributes
     def set_description(self, room_description):
         self.description = room_description
+
+    def set_item(self, item_name):
+        self.item = item_name
 
     def set_character(self, char_name):
         self.character = char_name
@@ -32,20 +36,30 @@ class Room():
     def get_character(self):
         return self.character
 
+    def get_item(self):
+        return self.item
+
     # Print room details
     def get_details(self):
-        print('You\'re in the %s: %s.' % (self.name, self.description))
+        print('You are here: %s' % (self.name.upper()))
+        print('------------------------')
+        print(self.description)
         for direction in self.linked_rooms:
-            room = self.linked_rooms[direction]
-            direction = direction.title()
-            print('To the %s is the %s.' % (direction, room.get_name()))
+            if direction is not 'magic':
+                room = self.linked_rooms[direction]
+                direction = direction.title()
+                print('The %s is to the %s.' % (room.get_name(), direction))
+        item = self.get_item()
+        if item is not None:
+            item.describe()
+        else:
+            print('')
         inhabitant = self.get_character()
         if inhabitant is not None:
-            print('--------------------')
             inhabitant.describe()
             print('\n')
         else:
-            print('--------------------')
+            print('------------------------')
             print('\n')
 
     # Move to another room    
@@ -53,5 +67,6 @@ class Room():
         if direction in self.linked_rooms:
             return self.linked_rooms[direction]
         else:
-            print( 'You can\'t go that way'  )
+            print( 'You can\'t go that way' )
+            return self
     

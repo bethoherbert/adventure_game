@@ -8,7 +8,7 @@ class Character():
 
     # Describe this character
     def describe(self):
-        print( 'There\'s a %s named %s in here!' % (self.description, self.name) )
+        print( '\n /o/ There\'s a %s named %s in here!' % (self.description, self.name) )
 
     # Set what this character will say when talked to
     def set_conversation(self, conversation):
@@ -19,12 +19,16 @@ class Character():
         if self.conversation is not None:
             print(self.name + ' says: ' + self.conversation)
         else:
-            print(self.name + 'is speechless.')
+            print(self.name + ' is speechless.')
 
     # Fight with this character
     def fight(self, combat_item):
         print(self.name + " doesn't want to fight with you")
         return True
+
+    # Give this character a gift
+    def gift(self):
+        print('%s says thank you!' % (self.name) )
 
 class Friend(Character):
 
@@ -35,12 +39,16 @@ class Friend(Character):
         self.superpower = None
 
    # Set friend attributes
-    def set_superpower(self, weakness):
-        self.superpower = weakness
+    def set_superpower(self, power):
+        self.superpower = power
 
     # Get friend attributes
     def get_superpower(self):
         return self.superpower
+    
+    # Hug your friend
+    def hug(self):
+        print('(っO ^ O)っ %s hugs you back! (っO ^ O)っ' % (self.name) )
 
 class Enemy(Character):
 
@@ -62,9 +70,15 @@ class Enemy(Character):
     def fight(self, combat_item):
         if combat_item == self.weakness:
             print('\n')
-            print("You fend %s off with the %s!" % (self.name, self.weakness))
+            print( '(¯`·._.·(¯`·._.· Hooray! ·._.·´¯)·._.·´¯)')
+            print('\n')
+            print("You vanquished %s with the %s!" % (self.name, self.weakness))
             return True
         else:
-            print('%s crushes you, you puny adventurer!' % (self.name))
+            print('\n')
+            print( '_.·._.·*^*·. BOOM! .·*^*·._.·._')
+            print('\n')
+            print('%s is no match for a %s! %s crushes you, you puny adventurer!' % (combat_item.title(), self.description, self.name))
+            print('\n')
             return False
 
