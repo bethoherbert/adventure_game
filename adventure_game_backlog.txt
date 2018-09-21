@@ -1,0 +1,15 @@
+
+collect the backpack
+    command 'collect the backpack'
+    sets backpack_collected = True
+collect an item
+    command 'collect <item>'
+    must have collected the backpack first (start with backpack_collected = False)
+        if backpack_collected = False, return message 'You need a backpack to carry what you collect.'
+    put the item in the backpack
+    remove the item from the room
+use collected item to fight
+    check it's in the backpack
+track number of enemies at beginning and allow user to see tally at any time
+
+C:\Users\Beth.Herbert\OneDrive - Slalom Consulting\code\src\github\adventure_game\adventure_game_backlog.txt
