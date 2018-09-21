@@ -1,6 +1,7 @@
 from random import randint
 from room import Room
 from item import Item
+from item import Backpack
 from character import Enemy
 from character import Friend
 
@@ -20,6 +21,7 @@ dining_hall.set_description('Your typical college mess.')
 ballroom = Room('Ballroom')
 ballroom.set_description('Cinderella would be in awe.')
 
+# Set up Layout
 masterbr.link_room(kitchen, "west")
 kitchen.link_room(masterbr, "east")
 kitchen.link_room(ballroom, "magic")
@@ -33,14 +35,13 @@ ballroom.link_room(dining_hall, "east")
 ballroom.link_room(kitchen, "magic")
 
 # Set up Backpack and Items
-
 kong = Item('Kong', 'red')
 kong.set_description( 'Cone-like rubber dog toy' )
-kitchen.set_item(kong)
+kitchen.set_items(kong)
 
-backpack = Item('backpack', 'khaki')
+backpack = Backpack('backpack', 'khaki')
 backpack.set_description('You\'ll need this to carry anything you want to pick up.')
-kitchen.set_item(backpack)
+kitchen.set_items(backpack)
 
 # Set up enemies
 weakness1 = 'butter pecan ice cream'
@@ -52,37 +53,41 @@ lameweapons = ['wheel of brie', 'plate', 'peach', 'light-rail ticket', 'ladybug'
 evilapple = Enemy('Arnold the Apple', 'doctor-hating fruit')
 evilapple.set_conversation('Eat doctors or I\'ll stay!')
 evilapple.set_weakness(weakness3)
-dining_hall.set_character(evilapple)
+dining_hall.set_characters(evilapple)
 
 bbear = Enemy('Bombardier Bear', 'giant gummy bear')
 bbear.set_conversation('Bomb\'s away!')
 bbear.set_weakness(weakness2)
-battle_room.set_character(bbear)
+battle_room.set_characters(bbear)
 
 dave = Enemy('Dave', 'smelly zombie')
-dave.set_conversation('UAhrhhjwblehajrkewaablhchshhghhrhrhw')
+dave.set_conversation('UAhrhhj\'0.o,wblehajrkewaablhchshhghhrhrhw')
 dave.set_weakness(weakness1)
-kitchen.set_character(dave)
+kitchen.set_characters(dave)
 
 # Set up friends
 apollo = Friend('Apollo', 'a young dog')
 apollo.set_conversation('Arf!')
-masterbr.set_character(apollo)
+masterbr.set_characters(apollo)
 
 gil = Friend('Gil', 'leprechaun')
 gil.set_conversation('Top \'o the mornin\' to ye!')
 gil.set_superpower(weakness2)
-ballroom.set_character(gil)
+ballroom.set_characters(gil)
 
 artemis = Friend('Artemis', 'sparkly UniKitty')
 artemis.set_conversation('Hiiiiii!!!!!!! I am SO glad to see you.')
 artemis.set_superpower(weakness1)
-ballroom.set_character(artemis)
+ballroom.set_characters(artemis)
 
 # Set up starting conditions
 current_room = kitchen
 alive = True
 backpack_grabbed = False
+backpack.set_contents('squid')
+backpack.set_contents('bottle')
+backpack.set_contents('vhs cassette')
+backpack.set_contents('OED')
 
 # Define functions
 
@@ -107,7 +112,7 @@ Choose: """ % (inhabitant.name, inhabitant.weakness, option_b))
         player_wins = inhabitant.fight(weapon)
         if player_wins == True:
             global current_room
-            current_room.set_character(None)
+            current_room.set_characters(None)
         elif player_wins == False:
             global alive
             alive = False
@@ -116,8 +121,8 @@ Choose: """ % (inhabitant.name, inhabitant.weakness, option_b))
 # Play the game
 
 how_to_play = """
-1. Move from room to room: north, south, east, or west
-2. Interact with characters: talk, hug, gift, or fight
+  1. Move from room to room: north, south, east, or west
+  2. Interact with characters: talk, hug, gift, or fight
 """
 
 print('\n')
@@ -138,9 +143,11 @@ while alive == True:
 
     print('\n')
     current_room.get_details()
-    inhabitant = current_room.get_character()
+    print('Your backpack currently contains:')
+    backpack.describe_contents()
+    inhabitant = current_room.get_characters()
     
-    command = input('What do you want to do? ')
+    command = input('\n What do you want to do? ')
 
     print ('\n')
 
@@ -156,6 +163,14 @@ while alive == True:
         else:
             print( 'Sorry, there is no one else here. Guess you have to talk to yourself.')
             print('\n')
+
+    elif command == 'kong':
+            #Need to figure out how to make this generic to any item, not specific to kong.
+        if backpack_grabbed is False:
+            print('You need a backpack to carry what you collect.')
+        else:
+            backpack.contents.append(kong.name)
+            #Need to figure out how to get the item out of the room's inventory.
 
     elif command == 'backpack':
         backpack.grab(current_room)
@@ -189,9 +204,9 @@ while alive == True:
             print('\n')
 
     else:
-        print( """
-    I don\'t understand that request. 
+        print("""
+  I don\'t understand that request. 
     
-    Here are your options.
+  Your options:
 
         %s""" % (how_to_play))

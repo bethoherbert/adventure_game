@@ -4,14 +4,10 @@ class Item():
         self.name = item_name
         self.color = item_color
         self.description = None
-        self.contents =[]
     
     # Set item attributes
     def set_description(self, item_description):
         self.description = item_description
-
-    def set_contents(self, item):
-        self.contents.append(item)
 
     def set_color(self, item_color):
         self.color = item_color
@@ -26,15 +22,27 @@ class Item():
     def get_name(self):
         return self.name
     
-    def get_contents(self):
-        return self.contents    
-
     # Grab backpack
     def grab(self, room):
-        room.item.remove(self)
+        room.items.remove(self)
         print('The backpack is all yours! You can now collect items as you go.')
 
     # Collect items
-    def collect(self, room):
-        room.item.remove(self)
-        backpack.contents.append(self)
+
+class Backpack(Item):
+
+    # Create a backpack; set and get contents
+    def __init__(self, item_name, item_color):
+
+        super().__init__(item_name, item_color)
+        self.contents = []
+
+    def set_contents(self, item):
+        self.contents.append(item)
+
+    def get_contents(self):
+        return self.contents    
+
+    def describe_contents(self):
+        for i in range(0, len(self.contents)):
+            print(self.contents[i])

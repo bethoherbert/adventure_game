@@ -4,18 +4,18 @@ class Room():
         self.name = room_name
         self.description = None
         self.linked_rooms = {}
-        self.character = []
-        self.item = []
+        self.characters = []
+        self.items = []
 
     # Set room attributes
     def set_description(self, room_description):
         self.description = room_description
 
-    def set_item(self, item_name):
-        self.item.append(item_name)
+    def set_items(self, items_name):
+        self.items.append(items_name)
 
-    def set_character(self, char_name):
-        self.character.append(char_name)
+    def set_characters(self, char_name):
+        self.characters.append(char_name)
 
     def set_name(self, room_name):
         self.name = room_name
@@ -30,11 +30,11 @@ class Room():
     def get_description(self):
         return self.description
 
-    def get_character(self):
-        return self.character
+    def get_characters(self):
+        return self.characters
 
-    def get_item(self):
-        return self.item
+    def get_items(self):
+        return self.items
 
     # Print room details
     def get_details(self):
@@ -47,14 +47,14 @@ class Room():
                 direction = direction.title()
                 print('The %s is to the %s.' % (room.get_name(), direction))
 
-        if self.get_item is not None:
-            for i in range(0, len(self.item)):
-                self.item[i].describe()        
+        if self.get_items is not None:
+            for i in range(0, len(self.items)):
+                self.items[i].describe()        
         else:
             print('')
-        if self.character is not None:
-            for i in range(0, len(self.character)):
-                self.character[i].describe()
+        if self.characters is not None:
+            for i in range(0, len(self.characters)):
+                self.characters[i].describe()
             print('\n')
         else:
             print('No one else is in here with you.')
