@@ -49,8 +49,7 @@ class Room():
 
         if self.get_item is not None:
             for i in range(0, len(self.item)):
-                self.item[i].describe()
-        
+                self.item[i].describe()        
         else:
             print('')
         if self.character is not None:

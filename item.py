@@ -4,30 +4,37 @@ class Item():
         self.name = item_name
         self.color = item_color
         self.description = None
+        self.contents =[]
     
-    # Set item attributes    
+    # Set item attributes
     def set_description(self, item_description):
         self.description = item_description
 
+    def set_contents(self, item):
+        self.contents.append(item)
+
     def set_color(self, item_color):
         self.color = item_color
-
-    def set_name(self, item_name):
-        self.name = item_name
 
     # Get item attributes
     def describe(self):
         print( '\n /o/ In this room, there is a %s %s.' % (self.color, self.name) )
 
     def get_description(self):
-        return self.description    
+        return self.description
     
     def get_name(self):
         return self.name
     
-    # Print item details
-    def get_details(self):
-        print ( self.color )
-        print ( self.name )
-        print ( self.description )
+    def get_contents(self):
+        return self.contents    
 
+    # Grab backpack
+    def grab(self, room):
+        room.item.remove(self)
+        print('The backpack is all yours! You can now collect items as you go.')
+
+    # Collect items
+    def collect(self, room):
+        room.item.remove(self)
+        backpack.contents.append(self)

@@ -32,7 +32,8 @@ battle_room.link_room(ballroom, "magic")
 ballroom.link_room(dining_hall, "east")
 ballroom.link_room(kitchen, "magic")
 
-# Set up Items
+# Set up Backpack and Items
+
 kong = Item('Kong', 'red')
 kong.set_description( 'Cone-like rubber dog toy' )
 kitchen.set_item(kong)
@@ -81,6 +82,7 @@ ballroom.set_character(artemis)
 # Set up starting conditions
 current_room = kitchen
 alive = True
+backpack_grabbed = False
 
 # Define functions
 
@@ -113,6 +115,11 @@ Choose: """ % (inhabitant.name, inhabitant.weakness, option_b))
  
 # Play the game
 
+how_to_play = """
+1. Move from room to room: north, south, east, or west
+2. Interact with characters: talk, hug, gift, or fight
+"""
+
 print('\n')
 print("""
 Welcome to the Herberts\' Great Adventure!
@@ -122,11 +129,10 @@ _________________________ ô,ô ___________________________
 Object of the game: Laugh and smile.
 
 How to play:
-1. Move from room to room: north, south, east, or west
-2. Interact with characters: talk, hug, gift, or fight
+%s
 
 Have fun!
-""")
+""" % (how_to_play))
 
 while alive == True:
 
@@ -150,6 +156,10 @@ while alive == True:
         else:
             print( 'Sorry, there is no one else here. Guess you have to talk to yourself.')
             print('\n')
+
+    elif command == 'backpack':
+        backpack.grab(current_room)
+        backpack_grabbed = True
 
     elif command == 'fight':
         challenge_to_fight()
@@ -184,6 +194,4 @@ while alive == True:
     
     Here are your options.
 
-    1. Move from room to room: north, south, east, or west
-    2. Interact with characters: talk, hug, gift, or fight
-        """)
+        %s""" % (how_to_play))
